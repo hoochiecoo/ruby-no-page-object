@@ -1,0 +1,1 @@
+# ruby-no-page-object
