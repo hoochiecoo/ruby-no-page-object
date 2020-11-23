@@ -1,0 +1,9 @@
+default: --format json  --color ENV=INT --tags @DEV -p html_report #REMOTE_HUB=azondocker:4555
+#default: --format json  --color  REMOTE_HUB=azondocker:4555 ENV=DEV --tags @DEV -p html_report
+
+html_report: --format html --out report<%= ENV['TEST_ENV_NUMBER'] %>.html
+json_report: --format json --out report<%= ENV['TEST_ENV_NUMBER'] %>.json
+
+first_run: --format pretty --format json --out report.json -f rerun --out rerun.txt
+second_run: --format pretty --format json --out report_rerun.json @rerun.txt
+parallel: --format json --out report_<%= ENV['TEST_ENV_NUMBER'] %>.json --format progress --format ParallelTests::Gherkin::RuntimeLogger  --out cucumber_failures.log
